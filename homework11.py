@@ -4,61 +4,42 @@
 # Создать экземпляр банковского аккаунта и проверить его работу.
 import datetime
 
-history = []
-balance = [0]
-
-
-# replenish = [0]
-# withdrawal = [0]
-
 
 class BankAccount:
-    i = 0
-    i1 = 0
+    balance = 0
+    history = []
 
-    def __init__(self, amount, amount_1):
-        self.amount = amount
-        self.amount_1 = amount_1
+    @classmethod
+    def replenish(cls, amount):
+        cls.balance += amount
+        time1 = datetime.datetime.now()
+        cls.history.append(f'{time1}  На ваш баланс было зачисленно:{amount}')
 
-    def replenish(self):
+        return f'На ваш баланс зачислено: {amount} '
 
-        while self.i != 1:
-            balance[0] = balance[0] + self.amount
-            self.i += 1
-        return f'На ваш баланс зачислено: {self.amount} '
+    @classmethod
+    def withdrawal(cls, amount_1):
+        cls.balance -= amount_1
+        time2 = datetime.datetime.now()
+        cls.history.append(f'{time2}  С вашего баланса было списано: {amount_1}')
 
-    def withdrawal(self):
+        return f'Вы сняли: {amount_1}'
 
-        while self.i1 != 1:
-            balance[0] = balance[0] - self.amount_1
-            self.i1 += 1
-        return f'Вы сняли: {self.amount_1}'
-
-    def get_balance(self):
-        return f'Остаток: {balance[0]}'
-
-
-class History(BankAccount):
-
-    def hisory(self):
-        super().replenish()
-        vremya = datetime.datetime.now()
-        super().withdrawal()
-        vremya_1 = datetime.datetime.now()
-        history.append(
-            f'+{self.amount}, {vremya}. -{self.amount_1}, Время выполнения {vremya_1}.')
-
-        return history
+    @classmethod
+    def get_balance(cls):
+        time3 = datetime.datetime.now()
+        cls.history.append(f'{time3}  Была произведена проверка баланса, текущий баланс: {cls.balance}')
+        return f'Остаток: {cls.balance}'
 
 
-account_transactions = History(400, 100)
-account_transactions_1 = History(400, 200)
-print(account_transactions.replenish())
-print(account_transactions.withdrawal())
+account_transactions = BankAccount()
+account_transactions_1 = BankAccount()
+print(account_transactions.replenish(300))
+print(account_transactions.withdrawal(100))
 print(account_transactions.get_balance())
-print(*account_transactions.hisory())
 
-print(account_transactions_1.replenish())
-print(account_transactions_1.withdrawal())
+print(account_transactions_1.replenish(400))
+print(account_transactions_1.withdrawal(200))
 print(account_transactions_1.get_balance())
-print(*account_transactions_1.hisory())
+
+print(*BankAccount.history)

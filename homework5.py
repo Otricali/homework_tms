@@ -19,7 +19,6 @@ else:
     print(check_eveness(numbers))
 print('------------------------------')
 
-
 # 2
 # Написать функцию, которая принимает число n и выводит числа от 0 до n.
 # Если число является четным, вывести квадрат числа, вместо числа.
@@ -32,20 +31,20 @@ num = input('Введите число: ')
 
 
 def output_numbers(x):
-    if x.isdigit():
+    try:
         x = int(num)
-    else:
-        return 'Ошибка! Введеные данные не являются числом'
 
-    for i in range(0, x):
-        if i % 4 == 0 and i % 7 == 0 and i !=0:
-            print(i)
-            break
-        elif check_eveness(i):
-            print(i ** 2)
-        else:
-            print(i)
+        for i in range(0, x):
+            if i % 4 == 0 and i % 7 == 0 and i != 0:
+                print(i)
+                break
+            elif check_eveness(i):
+                print(i ** 2)
+            else:
+                print(i)
 
+    except (ValueError, NameError):
+        print('Ошибка! Введеные данные не являются числом')
 
 
 output_numbers(num)

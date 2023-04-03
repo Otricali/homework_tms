@@ -53,22 +53,24 @@ import random
 
 print('1 = камень,', '2 = ножницы,', '3 = бумага.', sep='\n')
 print('Сыграем в игру камень ножницы бумага. Выберете число:')
-
-your_choice = int(input())
 bots_number = random.randint(1, 3)
-# print(bots_number)
-if your_choice == 1 and bots_number == 2:
-    print('Бот выбрал ножницы, вы выйграли!')
-elif your_choice == 1 and bots_number == 3:
-    print('Бот выбрал бумагу, вы проиграли!')
-elif your_choice == 2 and bots_number == 1:
-    print('Бот выбрал камень, вы проиграли!')
-elif your_choice == 2 and bots_number == 3:
-    print('Бот выбрал бумагу, вы выйграли!')
-elif your_choice == 3 and bots_number == 1:
-    print('Бот выбрал камень, вы выйграли!')
-elif your_choice == 3 and bots_number == 2:
-    print('Бот выбрал ножницы, вы проиграли!')
-else:
-    print('Ничья!')
+try:
+    your_choice = int(input())
+
+    if your_choice == 1 and bots_number == 2:
+        print('Бот выбрал ножницы, вы выйграли!')
+    elif your_choice == 1 and bots_number == 3:
+        print('Бот выбрал бумагу, вы проиграли!')
+    elif your_choice == 2 and bots_number == 1:
+        print('Бот выбрал камень, вы проиграли!')
+    elif your_choice == 2 and bots_number == 3:
+        print('Бот выбрал бумагу, вы выйграли!')
+    elif your_choice == 3 and bots_number == 1:
+        print('Бот выбрал камень, вы выйграли!')
+    elif your_choice == 3 and bots_number == 2:
+        print('Бот выбрал ножницы, вы проиграли!')
+    else:
+        print('Ничья!')
+except (ValueError, NameError):
+    print('Введеные данные не являются числом')
 print('--------------------------------')

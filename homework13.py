@@ -8,7 +8,7 @@ import random
 
 
 class Iterator:
-    def __init__(self, start, end, stop):
+    def __init__(self, start, end, stop=None):
         self.stop = stop
         self.start = start
         self.end = end
@@ -20,30 +20,25 @@ class Iterator:
         num = random.randint(self.start, self.end)
         if num == self.stop:
             raise StopIteration
-        else:
-            return num
+        return num
 
 
-def generator(start, end, stop):
-
+def generator(start, end, stop=None):
     while True:
         num = random.randint(start, end)
-        if num != stop:
-            yield num
-        else:
+        if num == stop:
             break
+        yield num
 
 
-iterator = Iterator(0, 6, 1)
 try:
-    for i in range(5):
-        print(next(iterator), end=' ')
+    for i in Iterator(0, 6, 1):
+        print(i, end=' ''\n')
 except StopIteration:
     print('stop')
 
-gen = generator(0, 6, 1)
 try:
-    for i in range(5):
-        print(next(gen), end=' ''\n')
+    for i in generator(0, 6, 1):
+        print(i, end=' ')
 except StopIteration:
     print('stop')

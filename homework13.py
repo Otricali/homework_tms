@@ -8,33 +8,42 @@ import random
 
 
 class Iterator:
-    def __init__(self, limit: int, stop_num):
-        self.stop_num = stop_num
-        self.limit = limit
-        self.num = [random.randint(0, self.limit) for _ in range(0, 10)]
+    def __init__(self, start, end, stop):
+        self.stop = stop
+        self.start = start
+        self.end = end
 
-    def __getitem__(self, index: int):
-        if self.stop_num == self.num[index]:
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        num = random.randint(self.start, self.end)
+        if num == self.stop:
             raise StopIteration
         else:
-            return self.num[index]
+            return num
 
 
-s_iter2 = Iterator(10, 1)
-for i in s_iter2:
-    print(i, end=' ')
+def generator(start, end, stop):
 
-
-def generator_function(limit: int, stop_num: int):
-    index = 0
     while True:
-        lst = [random.randint(0, limit) for _ in range(0, 10)]
-        if lst[index] == stop_num:
-            break
+        num = random.randint(start, end)
+        if num != stop:
+            yield num
         else:
-            index += 0
-            yield lst[index]
+            break
 
 
-for item in generator_function(10, 9):
-    print(item)
+iterator = Iterator(0, 6, 1)
+try:
+    for i in range(5):
+        print(next(iterator), end=' ')
+except StopIteration:
+    print('stop')
+
+gen = generator(0, 6, 1)
+try:
+    for i in range(5):
+        print(next(gen), end=' ''\n')
+except StopIteration:
+    print('stop')
